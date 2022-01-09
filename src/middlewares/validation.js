@@ -78,14 +78,12 @@ export const housesBodyValidator = checkSchema({
     }
 })
 
-export const userLocationIdValidation = [
-    check('userId').custom(async value => {
-        let msg = ''
-        const users =  await Users.findAll({
-            attributes: ['id']
-        })
-        const userIdExists = users.findIndex(id => id === value)
-        if (userIdExists === -1) return msg = 'userID does not exist.'
-        return msg
+export const userLocationIdValidation = check('userId').custom(async value => {
+    let msg = ''
+    const users =  await Users.findAll({
+        attributes: ['id']
     })
-]
+    const userIdExists = users.findIndex(id => id === value)
+    if (userIdExists === -1) return msg = 'userID does not exist.'
+    return msg
+})

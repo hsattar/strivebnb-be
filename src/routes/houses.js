@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import { Houses } from '../db/models/index.js'
+import { Op } from 'sequelize'
+import { Houses, Location } from '../db/models/index.js'
 import { housesData } from '../data/housesData.js'
 import { housesBodyValidator, userLocationIdValidation } from '../middlewares/validation.js'
 import { validationResult } from 'express-validator'
@@ -20,8 +21,59 @@ housesRouter.route('/')
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) return next({ code: 4000, msg: errors })
+        delete req.body.id
         const house = await Houses.create(req.body)
         res.send(house)
+    } catch (error) {
+        next(error)
+    }
+})
+
+housesRouter.get('/search', async (req, res, next) => {
+    try {
+        let price = []
+        if (req.query.price) {
+           price = req.query.price.split(',') 
+        }
+
+        const houses = await Houses.findAll({
+            include: [{ 
+                model: Location, 
+                attributes: ['country', 'city', 'postcode'],
+                ...(req.query.country && {
+                    where: {
+                        country: {
+                            [Op.iLike]: `%${req.query.country}%`
+                        }
+                    }
+                }),
+    
+                ...(req.query.city && {
+                    where: {
+                        city: {
+                            [Op.iLike]: `%${req.query.city}%`
+                        }
+                    }
+                })
+            }],
+
+            ...(req.query.name && {
+                where: {
+                    name: {
+                        [Op.iLike]: `%${req.query.name}%`
+                    }
+                }
+            }),
+
+            ...(req.query.price && {
+                where: {
+                    price: {
+                        [Op.between]: price
+                    }
+                }
+            }) 
+        })
+        res.send(houses)
     } catch (error) {
         next(error)
     }
@@ -59,6 +111,7 @@ housesRouter.route('/:houseId')
 .put(async (req, res, next) => {
     try {
         if (req.params.houseId.length !== 36) return next({ code: 400, msg: invalidIdError })
+        delete req.body.id
         const house = await Houses.update(req.body, {
             where: { id: req.params.houseId },
             returning: true

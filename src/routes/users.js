@@ -20,6 +20,7 @@ usersRouter.route('/')
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) return next({ code: 4000, msg: errors })
+        delete req.body.id
         const user = await Users.create(req.body)
         res.send(user)
     } catch (error) {
@@ -50,6 +51,7 @@ usersRouter.route('/:userId')
 .put(async (req, res, next) => {
     try {
         if (req.params.userId.length !== 36) return next({ code: 400, msg: invalidIdError })
+        delete req.body.id
         const user = await Users.update(req.body, {
             where: { id: req.params.userId },
             returning: true
