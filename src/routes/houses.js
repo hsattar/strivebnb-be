@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { Houses } from '../db/models/index.js'
 import { housesData } from '../data/housesData.js'
+import { invalidIdError, badRequestError, notFoundError } from '../data/errorMessages.js'
 
 const housesRouter = Router()
 
@@ -43,7 +44,9 @@ housesRouter.delete('/deleteall', async (req, res, next) => {
 housesRouter.route('/:houseId')
 .get(async (req, res, next) => {
     try {
+        if (req.params.houseId.length !== 36) return next({ code: 400, msg: invalidIdError })
         const house = await Houses.findByPk(req.params.houseId)
+        if (!house) return next({ code: 404, msg: notFoundError })
         res.send(house)
     } catch (error) {
         next(error)
@@ -51,10 +54,12 @@ housesRouter.route('/:houseId')
 })
 .put(async (req, res, next) => {
     try {
+        if (req.params.houseId.length !== 36) return next({ code: 400, msg: invalidIdError })
         const house = await Houses.update(req.body, {
             where: { id: req.params.houseId },
             returning: true
         })
+        if (!house) return next({ code: 404, msg: notFoundError })
         res.send(house[1][0])
     } catch (error) {
         next(error)
@@ -62,9 +67,11 @@ housesRouter.route('/:houseId')
 })
 .delete(async (req, res, next) => {
     try {
+        if (req.params.houseId.length !== 36) return next({ code: 400, msg: invalidIdError })
         const result = await Houses.destroy({
             where: { id: req.params.houseId }
         })
+        if (!result) return next({ code: 404, msg: notFoundError })
         res.sendStatus(204)
     } catch (error) {
         next(error)

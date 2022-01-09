@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { Location } from '../db/models/index.js'
 import { locationData } from '../data/locationData.js'
+import { invalidIdError, badRequestError, notFoundError } from '../data/errorMessages.js'
 
 const locationRouter = Router()
 
@@ -34,7 +35,9 @@ locationRouter.post('/bulkcreate', async (req, res, next) => {
 locationRouter.route('/:locationId')
 .get(async (req, res, next) => {
     try {
+        if (req.params.locationId.length !== 36) return next({ code: 400, msg: invalidIdError })
         const location = await Location.findByPk(req.params.locationId)
+        if (!location) return next({ code: 404, msg: notFoundError })
         res.send(location)
     } catch (error) {
         next(error)
@@ -42,10 +45,12 @@ locationRouter.route('/:locationId')
 })
 .put(async (req, res, next) => {
     try {
+        if (req.params.locationId.length !== 36) return next({ code: 400, msg: invalidIdError })
         const location = await Location.update(req.body, {
             where: { id: req.params.locationId },
             returning: true
         })
+        if (!location) return next({ code: 404, msg: notFoundError })
         res.send(location[1][0])
     } catch (error) {
         next(error)
@@ -53,9 +58,11 @@ locationRouter.route('/:locationId')
 })
 .delete(async (req, res, next) => {
     try {
+        if (req.params.locationId.length !== 36) return next({ code: 400, msg: invalidIdError })
         const result = await Location.destroy({
             where: { id: req.params.locationId }
         })
+        if (!result) return next({ code: 404, msg: notFoundError })
         res.sendStatus(204)
     } catch (error) {
         next(error)
