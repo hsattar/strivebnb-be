@@ -20,6 +20,14 @@ housesRouter.route('/')
     }
 })
 
+housesRouter.post('/bulkcreate', async (req, res, next) => {
+    try {
+        res.send('OK')
+    } catch (error) {
+        next(error)
+    }
+})
+
 housesRouter.route('/:houseId')
 .get(async (req, res, next) => {
     try {
