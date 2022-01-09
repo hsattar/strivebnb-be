@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { Houses } from '../db/models/index.js'
 import { housesData } from '../data/housesData.js'
+import { housesBodyValidator, userLocationIdValidation } from '../middlewares/validation.js'
+import { validationResult } from 'express-validator'
 import { invalidIdError, badRequestError, notFoundError } from '../data/errorMessages.js'
 
 const housesRouter = Router()
@@ -14,8 +16,10 @@ housesRouter.route('/')
         next(error)
     }
 })
-.post(async (req, res, next) => {
+.post(housesBodyValidator, userLocationIdValidation, async (req, res, next) => {
     try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) return next({ code: 4000, msg: errors })
         const house = await Houses.create(req.body)
         res.send(house)
     } catch (error) {

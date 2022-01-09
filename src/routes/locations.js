@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { Location } from '../db/models/index.js'
 import { locationData } from '../data/locationData.js'
+import { locationBodyValidator } from '../middlewares/validation.js'
+import { validationResult } from 'express-validator'
 import { invalidIdError, badRequestError, notFoundError } from '../data/errorMessages.js'
 
 const locationRouter = Router()
@@ -14,8 +16,10 @@ locationRouter.route('/')
         next(error)
     }
 })
-.post(async (req, res, next) => {
+.post(locationBodyValidator, async (req, res, next) => {
     try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) return next({ code: 4000, msg: errors })
         const user = await Location.create(req.body)
         res.send(user)
     } catch (error) {
