@@ -31,6 +31,15 @@ housesRouter.post('/bulkcreate', async (req, res, next) => {
     }
 })
 
+housesRouter.delete('/deleteall', async (req, res, next) => {
+    try {
+        const houses = await Houses.destroy({ truncate: true })
+        res.sendStatus(204)
+    } catch (error) {
+        next(error)
+    }
+})
+
 housesRouter.route('/:houseId')
 .get(async (req, res, next) => {
     try {

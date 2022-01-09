@@ -1,62 +1,70 @@
 // USER IDS:
-// 9d2d3daf-29c9-43c2-89f0-d80bd86f13a2
-// b10dc7fc-1f5a-41c4-8523-63774800a298
-// f1803bdc-95fb-42bb-8ba9-47ad0deba28d
+// dcda88fd-8279-487e-8cdc-960d00dc41e5
+// 968ad322-6c86-4929-9692-4ca23a6ec12b
+// 327bb1d5-4b58-4b96-995c-bf844970e432
 
 // LOCATION IDS:
-// 0b907f97-2e65-4492-8424-eca438bab2e6
-// fb7c2920-aa1e-4042-9e58-312aad47f6b5
-// d8649734-3e42-44b1-85a8-a40e0c234760
-// 3bbbacc5-2ae8-4555-aeb9-110be3394741
+// 6bbaf28f-497f-46d2-ae4d-ab26f123983e
+// 43498bcd-5577-4043-99a1-6509499ce6e6
+// 91101b93-3b73-45fa-886a-6fd231fbfedb
+// 58cbe4ba-7883-4088-a6b7-89ffd3543563
 
 
 export const housesData = [
     {
-        description: 'Random Description for this property',
-        price: 59,
-        userId: '9d2d3daf-29c9-43c2-89f0-d80bd86f13a2',
-        locationId: '0b907f97-2e65-4492-8424-eca438bab2e6'    
+        "name": "Big House",
+        "description": "Random Description for this property",
+        "price": 59,
+        "userId": "dcda88fd-8279-487e-8cdc-960d00dc41e5",
+        "locationId": "6bbaf28f-497f-46d2-ae4d-ab26f123983e"
     },
     {
-        description: 'Random Description for this property',
-        price: 80,
-        userId: 'b10dc7fc-1f5a-41c4-8523-63774800a298',
-        locationId: '0b907f97-2e65-4492-8424-eca438bab2e6'    
+        "name": "Small House",
+        "description": "Random Description for this property",
+        "price": 80,
+        "userId": "968ad322-6c86-4929-9692-4ca23a6ec12b",
+        "locationId": "6bbaf28f-497f-46d2-ae4d-ab26f123983e"
     },
     {
-        description: 'Random Description for this property',
-        price: 105,
-        userId: '9d2d3daf-29c9-43c2-89f0-d80bd86f13a2',
-        locationId: 'fb7c2920-aa1e-4042-9e58-312aad47f6b5'    
+        "name": "Okay House",
+        "description": "Random Description for this property",
+        "price": 105,
+        "userId": "dcda88fd-8279-487e-8cdc-960d00dc41e5",
+        "locationId": "43498bcd-5577-4043-99a1-6509499ce6e6"
     },
     {
-        description: 'Random Description for this property',
-        price: 32,
-        userId: '9d2d3daf-29c9-43c2-89f0-d80bd86f13a2',
-        locationId: 'd8649734-3e42-44b1-85a8-a40e0c234760'    
+        "name": "Big House",
+        "description": "Random Description for this property",
+        "price": 32,
+        "userId": "dcda88fd-8279-487e-8cdc-960d00dc41e5",
+        "locationId": "91101b93-3b73-45fa-886a-6fd231fbfedb"
     },
     {
-        description: 'Random Description for this property',
-        price: 50,
-        userId: 'b10dc7fc-1f5a-41c4-8523-63774800a298',
-        locationId: 'fb7c2920-aa1e-4042-9e58-312aad47f6b5'    
+        "name": "Small House",
+        "description": "Random Description for this property",
+        "price": 50,
+        "userId": "968ad322-6c86-4929-9692-4ca23a6ec12b",
+        "locationId": "43498bcd-5577-4043-99a1-6509499ce6e6"
     },
     {
-        description: 'Random Description for this property',
-        price: 67,
-        userId: 'f1803bdc-95fb-42bb-8ba9-47ad0deba28d',
-        locationId: 'd8649734-3e42-44b1-85a8-a40e0c234760'    
+        "name": "Okay House",
+        "description": "Random Description for this property",
+        "price": 67,
+        "userId": "327bb1d5-4b58-4b96-995c-bf844970e432",
+        "locationId": "91101b93-3b73-45fa-886a-6fd231fbfedb"
     },
     {
-        description: 'Random Description for this property',
-        price: 140,
-        userId: 'f1803bdc-95fb-42bb-8ba9-47ad0deba28d',
-        locationId: '3bbbacc5-2ae8-4555-aeb9-110be3394741'    
+        "name": "Big House",
+        "description": "Random Description for this property",
+        "price": 140,
+        "userId": "327bb1d5-4b58-4b96-995c-bf844970e432",
+        "locationId": "58cbe4ba-7883-4088-a6b7-89ffd3543563"
     },
     {
-        description: 'Random Description for this property',
-        price: 285,
-        userId: 'b10dc7fc-1f5a-41c4-8523-63774800a298',
-        locationId: 'd8649734-3e42-44b1-85a8-a40e0c234760'    
+        "name": "Very Large House",
+        "description": "Random Description for this property",
+        "price": 285,
+        "userId": "968ad322-6c86-4929-9692-4ca23a6ec12b",
+        "locationId": "91101b93-3b73-45fa-886a-6fd231fbfedb"
     }
 ]

@@ -9,6 +9,10 @@ const Houses = sequelize.define('house', {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4
     },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     description: {
         type: DataTypes.TEXT,
         allowNull: false
