@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { Op } from 'sequelize'
 import { Houses, Location } from '../db/models/index.js'
 import { housesData } from '../data/housesData.js'
-import { housesBodyValidator, userLocationIdValidation } from '../middlewares/validation.js'
+import { housesBodyValidator, userIdValidation } from '../middlewares/validation.js'
 import { validationResult } from 'express-validator'
 import { invalidIdError, badRequestError, notFoundError } from '../data/errorMessages.js'
 
@@ -17,7 +17,7 @@ housesRouter.route('/')
         next(error)
     }
 })
-.post(housesBodyValidator, userLocationIdValidation, async (req, res, next) => {
+.post(housesBodyValidator, async (req, res, next) => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) return next({ code: 4000, msg: errors })
