@@ -15,8 +15,8 @@ housesRouter.route('/')
 })
 .post(async (req, res, next) => {
     try {
-        const user = await Houses.create(req.body)
-        res.send(user)
+        const house = await Houses.create(req.body)
+        res.send(house)
     } catch (error) {
         next(error)
     }
