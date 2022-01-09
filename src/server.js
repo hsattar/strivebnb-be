@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import { testDBConnection } from "./db/connection.js"
 import usersRouter from "./routes/users.js"
+import locationsRouter from "./routes/locations.js"
 import housesRouter from "./routes/houses.js"
 
 const server = express()
@@ -13,6 +14,7 @@ server.use(cors())
 
 server.get('/', (req, res) => res.send('OK'))
 server.use('/users', usersRouter)
+server.use('/locations', locationsRouter)
 server.use('/houses', housesRouter)
 
 server.listen(port, () => {
